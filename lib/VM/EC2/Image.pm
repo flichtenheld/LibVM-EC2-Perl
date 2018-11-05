@@ -47,6 +47,7 @@ These object methods are supported:
  platform      -- "Windows" for Windows AMIs, otherwise undef.
  sriovNetSupport -- Specifies whether enhanced networking is enabled.
                     "simple" if enabled.
+ enaSupport    -- True if enabled
  stateReason   -- Explanation of a "failed" imageState. This is
                   a VM::EC2::Instance::State::Reason
                   object.
@@ -246,9 +247,10 @@ sub valid_fields {
     my $self = shift;
     return qw(imageId imageLocation imageState imageOwnerId isPublic
               productCodes architecture imageType kernelId ramdiskId
-              platform sriovNetSupport stateReason imageOwnerAlias name
-              description rootDeviceType rootDeviceName blockDeviceMapping
-              virtualizationType tagSet hypervisor);
+              platform sriovNetSupport enaSupport stateReason
+              imageOwnerAlias name description rootDeviceType
+              rootDeviceName blockDeviceMapping virtualizationType
+              tagSet hypervisor);
 }
 
 sub primary_id { shift->imageId }

@@ -166,7 +166,7 @@ Common optional arguments:
  -virtualization_type Type of virtualization ("paravirtual" or "hvm")
                       Default is "paravirtual"
  -sriov_net_support   Set to "simple" to enable enhanced networking for the AMI
- 
+ -ena-support         Set to true to enable ENA support
 While you do not have to specify the kernel ID, it is strongly
 recommended that you do so. Otherwise the kernel will have to be
 specified for run_instances().
@@ -193,6 +193,7 @@ sub register_image {
                   SriovNetSupport)) {
 	push @param,$self->single_parm($a,\%args);
     }
+    push @param,$self->boolean_parm("EnaSupport",\%args);
     push @param,$self->block_device_parm($args{-block_devices} || $args{-block_device_mapping});
 
     return $self->call('RegisterImage',@param);
@@ -224,6 +225,7 @@ retrieved:
  productCodes           -- array
  blockDeviceMapping     -- list of hashref
  sriovNetSupport        -- scalar
+ enaSupport             -- boolean
 
 All of these values can be retrieved more conveniently from the
 L<VM::EC2::Image> object returned from describe_images(), so there is

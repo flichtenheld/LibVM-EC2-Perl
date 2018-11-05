@@ -165,6 +165,8 @@ These object methods are supported:
 
  sriovNetSupport -- Specifies whether enhanced networking is enabled.  "simple" if so.
 
+ enaSupport     --  Adds  Amazon ENA support
+
  tagSet         -- Tags for the instance as a hashref. CHANGEABLE via add_tags()
                    and delete_tags().
 
@@ -521,6 +523,7 @@ sub valid_fields {
               hypervisor
               tagSet
               sriovNetSupport
+              enaSupport
              );
 }
 

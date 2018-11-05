@@ -653,6 +653,7 @@ retrieved:
  productCodes                      -- list of hashref
  ebsOptimized                      -- scalar
  sriovNetSupport                   -- scalar
+ enaSupport                        -- boolean
 
 All of these values can be retrieved more conveniently from the
 L<VM::EC2::Instance> object returned from describe_instances(), so
@@ -695,6 +696,7 @@ The following is the list of attributes that can be set:
  -sriov_net_support       -- enable enhanced networking support
                              (must supply 'simple' as value)
                              cannot be turned off once enabled
+ -ena-support             --  Enhanced Amazon network support
 
 Only one attribute can be changed in a single request. For example:
 
@@ -735,7 +737,7 @@ sub modify_instance_attribute {
                            SriovNetSupport)],
 	list_parm   => 'GroupId',
 	block_device_parm => 'BlockDeviceMapping',
-        boolean_parm => 'EbsOptimized',
+        boolean_parm => [qw(ebsOptimized EnaSupport)],
 					   });
     return $self->call('ModifyInstanceAttribute',@param);
 }
